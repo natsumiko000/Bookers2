@@ -1,11 +1,5 @@
-<% if flash[:notice] %>
-  <div class="flash">
-    <%= flash[:notice] %>
-  </div>
-<% end %>
+Users
 
-ログインしています
-<%= @user.id %>
 <h2>User Info</h2>
 <%= attachment_image_tag @user, :profile_image, width: "10%" %>
 <h4>name</h4><%= @user.name %>
@@ -14,21 +8,22 @@
     <p><%= link_to "profile-edit", edit_user_path(@user) %></p>
   <% end %>
 
+<h2>Users</h2>
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Option</th>
+      <th>image</th>
+      <th>name</th>
     </tr>
   </thead>
 
+
   <tbody>
-    <% @books.each do |book| %>
+    <% @users.each do |user| %>
       <tr>
-        <td><%= book.title %></td>
-        <td><%= book.body %></td>
-        <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
+      	 <td><%= attachment_image_tag user, :profile_image, width: "5%" %></td>
+        <td><%= user.name %></td>
+        <td><%= link_to 'show', user_path(user) %></td>
       </tr>
     <% end %>
   </tbody>
