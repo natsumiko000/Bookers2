@@ -1,14 +1,23 @@
 <%= form_for(@user) do |f| %>
- 
-    <h4>Name</h4>
-    <%= f.text_field :name %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %></h2>
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-    <h4>Image</h4>
-    <%= f.attachment_field :profile_image %>
- 
-    <h4>Introduction</h4>
-    <%= f.text_area :introduction %>
- 
-    <%= f.submit 'Update User' %><br>
- 
+  <h4>Name</h4>
+  <%= f.text_field :name %>
+
+  <h4>Image</h4>
+  <%= f.attachment_field :profile_image %>
+
+  <h4>Introduction</h4>
+  <%= f.text_area :introduction %>
+
+  <%= f.submit 'Update User' %><br>
 <% end %>
