@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   def index
     @user = User.find_by(id: current_user.id)
 	  @book = Book.new
-	  @books = Book.all
+	  @books = Book.all.order(create_at: :desc)
   end
 
   def show
@@ -45,8 +45,11 @@ class BooksController < ApplicationController
 
   def destroy
     book = current_user.books.find(params[:id])
-    book.destroy
-    redirect_to books_pat
+    if book.destroy
+      redirect_to books_path
+    else
+      redirect_to user_path(current_user)
+    end
   end
 
 
