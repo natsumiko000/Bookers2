@@ -3,7 +3,7 @@
     <div class="col-md-3">
 
       <h2>User Info</h2>
-      <%= attachment_image_tag @user, :profile_image, width: "10%" %>
+      <div class="mb-2"><%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></div>
       <table class="table">
         <thead>
           <tr>
@@ -18,9 +18,11 @@
           </tr>
         </tbody>
       </table>
-      <% if @user.id == current_user.id %>
-        <p><%= link_to "profile-edit", edit_user_path(@user) %></p>
-      <% end %>
+      <p>
+        <%= link_to edit_user_path(@user), class: "btn btn-primary w-100" do %>
+          <i class="fas fa-wrench"></i>
+        <% end %>
+      </p>
 
 
       <h2>New book</h2>
@@ -41,7 +43,7 @@
     </div>
     <div class="col-md-9">
       <h2>Users</h2>
-      <table>
+      <table class="table">
         <thead>
           <tr>
             <th>image</th>
@@ -52,7 +54,7 @@
         <tbody>
           <% @users.each do |user| %>
             <tr>
-            	 <td><%= attachment_image_tag user, :profile_image, width: "5%" %></td>
+            	 <td><%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %></td>
               <td><%= user.name %></td>
               <td><%= link_to 'show', user_path(user) %></td>
             </tr>
