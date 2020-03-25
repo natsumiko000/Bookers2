@@ -55,6 +55,7 @@
       <table class="table">
         <thead>
           <tr>
+            <th></th>
             <th>Title</th>
             <th>Option</th>
             <th></th>
@@ -63,10 +64,14 @@
         </thead>
         <tbody>
           <tr>
+            <td><%= attachment_image_tag @book.user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %><br><%= link_to @book.user.name, user_path(@book.user) %></td>
+
             <td><%= @book.title %></td>
             <td><%= @book.body %></td>
+            <% if @book.user.id == current_user.id %>
               <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-success"%></td>
               <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger"%></td>
+            <% end %>
             </tr>
         </tbody>
       </table>

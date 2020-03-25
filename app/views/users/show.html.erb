@@ -12,23 +12,23 @@
   <div class="row">
     <div class="col-md-3">
       <h2>User Info</h2>
-      <div class="mb-2"><%= attachment_image_tag @me, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></div>
+      <div class="mb-2"><%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></div>
       <table class="table table-responsive">
         <thead>
           <tr>
             <th>name</th>
-            <th scope="col"><%= @me.name %></th>
+            <th scope="col"><%= @user.name %></th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row">introduction</th>
-            <td><%= @me.introduction %></td>
+            <td><%= @user.introduction %></td>
           </tr>
         </tbody>
       </table>
       <p>
-        <%= link_to edit_user_path(@me), class: "btn btn-primary w-100" do %>
+        <%= link_to edit_user_path(@user), class: "btn btn-primary w-100" do %>
           <i class="fas fa-wrench"></i>
         <% end %>
       </p>
@@ -65,10 +65,8 @@
         <tbody>
           <% @books.each do |book| %>
             <tr>
-              <td><%= book.title %></td>
+              <td><%= link_to book.title, book_path(book) %></td>
               <td><%= book.body %></td>
-              <td><%= link_to 'Edit', edit_book_path(book) %></td>
-              <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
             </tr>
           <% end %>
         </tbody>

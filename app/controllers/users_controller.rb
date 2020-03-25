@@ -8,14 +8,18 @@ class UsersController < ApplicationController
   end
 
   def show
-    @me = User.find_by(id: current_user.id)
-    user = User.find_by(id: params[:id])
-    @books = user.books.order(created_at: :desc)
+    @user = User.find_by(id: params[:id])
+    @books = @user.books.order(created_at: :desc)
     @book = Book.new
   end
 
   def edit
-    @user = current_user
+    user = User.find_by(id: params[:id])
+    if user == current_user
+      @user = current_user
+    else
+      redirect_to user_path(current_user) and return
+    end
   end
 
   def update
